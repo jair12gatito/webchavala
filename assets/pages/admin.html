@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel Admin</title>
+</head>
+
+<body>
+
+<h1>Pedidos</h1>
+
+<div id="listaPedidos"></div>
+
+<script>
+
+const usuario = localStorage.getItem("usuario");
+const admin = localStorage.getItem("admin");
+
+if (!usuario || admin !== "true") {
+
+    alert("Acceso denegado");
+
+    window.location.href = "/index.html";
+}
+
+async function cargarPedidos() {
+
+    const res = await fetch("https://webchavala2.onrender.com/ordenes");
+
+    const pedidos = await res.json();
+
+    const lista = document.getElementById("listaPedidos");
+
+    pedidos.forEach(pedido => {
+
+        lista.innerHTML += `
+            <div style="
+                border:1px solid black;
+                margin:10px;
+                padding:10px;
+            ">
+
+                <h3>
+                    Proveedor:
+                    ${pedido.proveedorNombre}
+                </h3>
+
+                ${pedido.productos.map(p =>
+                    `<p>${p.nombre} - S/${p.precio}</p>`
+                ).join("")}
+
+            </div>
+        `;
+    });
+}
+
+cargarPedidos();
+
+</script>
+
+</body>
+</html>

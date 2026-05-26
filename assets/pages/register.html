@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #c74d8a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .formulario {
+            background: white;
+            padding: 30px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: black;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="formulario">
+
+        <h2 id="titulo">Crear Cuenta</h2>
+
+        <form id="formulario">
+
+            <input type="text" id="nombre" placeholder="Nombre">
+
+            <input type="email" id="email" placeholder="Correo" required>
+
+            <input type="password" id="password" placeholder="Contraseña" required>
+
+            <button type="submit" id="boton">
+                Registrarse
+            </button>
+
+        </form>
+
+        <p id="switchText" style="margin-top:15px; cursor:pointer; text-align:center;">
+            ¿Ya tienes cuenta? Inicia sesión
+        </p>
+
+    </div>
+
+    <script>
+
+        let loginMode = false;
+
+        const titulo = document.getElementById("titulo");
+        const boton = document.getElementById("boton");
+        const switchText = document.getElementById("switchText");
+        const nombreInput = document.getElementById("nombre");
+
+        switchText.addEventListener("click", () => {
+
+            loginMode = !loginMode;
+
+            if (loginMode) {
+
+                titulo.innerText = "Iniciar Sesión";
+                boton.innerText = "Ingresar";
+                nombreInput.style.display = "none";
+
+                switchText.innerText = "¿No tienes cuenta? Regístrate";
+
+            } else {
+
+                titulo.innerText = "Crear Cuenta";
+                boton.innerText = "Registrarse";
+                nombreInput.style.display = "block";
+
+                switchText.innerText = "¿Ya tienes cuenta? Inicia sesión";
+            }
+
+        });
+
+        const form = document.getElementById("formulario");
+
+        form.addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+            const nombre = document.getElementById("nombre").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            let url = "";
+
+            if (loginMode) {
+
+                url = "https://webchavala2.onrender.com/auth/login";
+
+            } else {
+
+                url = "https://webchavala2.onrender.com/auth/register";
+
+            }
+            const response = await fetch(url, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    nombre,
+                    email,
+                    password
+                })
+
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+if (!loginMode) {
+
+    alert("Usuario registrado correctamente");
+
+    localStorage.setItem("usuario", nombre);
+
+    window.location.href = "/index.html";
+
+} else {
+
+    if (data && data.nombre) {
+
+        localStorage.setItem("usuario", data.nombre);
+
+        if (data.admin === true) {
+
+            localStorage.setItem("admin", "true");
+
+        } else {
+
+            localStorage.removeItem("admin");
+        }
+
+        window.location.href = "/index.html";
+
+    } else {
+
+        alert("Correo o contraseña incorrectos");
+    }
+}
+
+});
+           
+    </script>
+
+
+
+</body>
+
+</html>

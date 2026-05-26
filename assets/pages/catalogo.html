@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Panaderia Chavala</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet icon" href="../img/logoo.jpg" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <div class="carrito-icono" onclick="abrirCarrito()">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="contador-carrito">0</span>
+    </div>
+
+    <div class="carrito" id="carrito">
+
+        <h2>Carrito de Compras</h2>
+
+        <div id="lista-carrito"></div>
+        <select id="proveedorSelect">
+            <input type="text" id="buscarProveedor" placeholder="Buscar proveedor">
+
+            <button onclick="buscarProveedor()">
+                Buscar
+            </button>
+            <option value="">Selecciona proveedor</option>
+        </select>
+        <h3 id="total">Total: S/ 0</h3>
+        <button onclick="finalizarCompra()">
+            Finalizar Orden de Compra
+        </button>
+
+    </div>
+    <section>
+        <div class="top-bar">
+            <div class="container">
+                <div class="topbar-main">
+                    <div class="topbar-contact">
+                        <a href="tel: +51 991-452-847">
+                            <i class="fa-solid fa-phone"></i>
+                            (+51) 991-452-847
+                        </a>
+                        <a href="mainto: contacto@chavalpan.com?subject=Quiero hacer un pedido grande">
+                            <i class="fa-solid fa-envelope"></i>
+                            ContactoChavPe@gmail.com
+                        </a>
+                    </div>
+                    <div class="topbar-social">
+                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/chavala.pasteleria/" target="_blank"><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://www.twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <header class="header padding-sm">
+        <div class="container text-aling">
+            <div class="logo-container">
+                <a href="../../index.html">
+                    <img class="logo-header" src="../img/chavala.jpg" alt="Logo de panaderia">
+                </a>
+            </div>
+            <div class="menu-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="nav-menu">
+                <a class="nav-menu-link nav-menu-noselected" href="../../index.html"> <i class="fa-solid fa-house"></i>
+                    HOME
+                </a>
+                <a class="nav-menu-link nav-menu-selected" href="./catalogo.html"> <i class="fa-solid fa-map"></i>
+                    CATALOGO
+                </a>
+
+                <a class="nav-menu-link nav-menu-noselected" href="../../index.html"> <i
+                        class="fa-solid fa-paper-plane"></i>
+                    RESERVACION</a>
+                <a class="nav-menu-link nav-menu-noselected" href="./register.html">
+                    <i class="fa-solid fa-user"></i>
+                    LOGIN </a>
+                <a class="nav-menu-link nav-menu-noselected" href="#" id="userText" style="visibility:hidden;">
+                </a>
+
+                <a class="nav-menu-link nav-menu-noselected" href="#" id="logoutBtn" style="visibility:hidden;">
+                    CERRAR SESIÓN
+                </a>
+            </div>
+        </div>
+
+
+    </header>
+    <main>
+        <div style="background:white; padding:15px; margin-bottom:20px; border-radius:10px;">
+            <h3>Registrar Proveedor</h3>
+
+            <input id="provNombre" placeholder="Nombre">
+            <input id="provRuc" placeholder="RUC">
+            <input id="provTel" placeholder="Teléfono">
+            <input id="provDir" placeholder="Dirección">
+
+            <button onclick="crearProveedor()">
+                Crear Proveedor
+            </button>
+        </div>
+
+        <section class="catalogo">
+
+            <h2 class="titulo-categoria">Pasteles</h2>
+
+            <div class="catalogo-grid">
+
+                <div class="producto">
+                    <img src="../img/tortachocolate_473x576.jpg">
+                    <h3>Torta de Chocolate</h3>
+                    <p class="precio">S/ 45</p>
+                    <button onclick="agregarCarrito('Pastel de Chocolate',45)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/tortaconchessecka.jpg">
+                    <h3>Torta con chesscake</h3>
+                    <p class="precio">S/ 50</p>
+                    <button onclick="agregarCarrito('Torta de chesscake',50)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/tortatemati_473x576.jpg">
+                    <h3>Torta tematica</h3>
+                    <p class="precio">S/ 40</p>
+                    <button onclick="agregarCarrito('Torta Tematica',40)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/pastel.jpg">
+                    <h3>Pastel de Piña</h3>
+                    <p class="precio">S/ 55</p>
+                    <button onclick="agregarCarrito('Pastel de Piña',55)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/pastel.jpg">
+                    <h3>Torta de Frutos del Bosque</h3>
+                    <p class="precio">S/ 60</p>
+                    <button onclick="agregarCarrito('Torta de frutos del Bosque',60)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/TORTASELNEGR.jpg">
+                    <h3>Torta de selva Negra</h3>
+                    <p class="precio">S/ 65</p>
+                    <button onclick="agregarCarrito('Torta de Selva negra',65)">
+                        Agregar
+                    </button>
+                </div>
+
+            </div>
+
+            <h2 class="titulo-categoria">Bocaditos</h2>
+
+            <div class="catalogo-grid">
+
+                <div class="producto">
+                    <img src="../img/minicaprese_473x576.jpg">
+                    <h3>Mini Capreses</h3>
+                    <p class="precio">S/ 25</p>
+                    <button onclick="agregarCarrito('Mini Capreses',25)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/minipiedelimon.jpg">
+                    <h3>Mini Pie de limon</h3>
+                    <p class="precio">S/ 20</p>
+                    <button onclick="agregarCarrito('Mini pie de limon',20)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/bocaditos.jpg">
+                    <h3>Empanaditas</h3>
+                    <p class="precio">S/ 18</p>
+                    <button onclick="agregarCarrito('Empanaditas',18)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/minitrufas_473x576.jpg">
+                    <h3>Mini Trufas</h3>
+                    <p class="precio">S/ 15</p>
+                    <button onclick="agregarCarrito('Mini trufas',15)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/minitartale.jpg">
+                    <h3>Mini Tartaleta</h3>
+                    <p class="precio">S/ 22</p>
+                    <button onclick="agregarCarrito('Mini Tartaleta',22)">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="producto">
+                    <img src="../img/minichesscak_473x576.jpg">
+                    <h3>Mini Chesscake</h3>
+                    <p class="precio">S/ 30</p>
+                    <button onclick="agregarCarrito('Mini Chesscake',30)">
+                        Agregar
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    </main>
+    <script>
+        async function crearProveedor() {
+
+            const nombre = document.getElementById("provNombre").value;
+            const ruc = document.getElementById("provRuc").value;
+            const telefono = document.getElementById("provTel").value;
+            const direccion = document.getElementById("provDir").value;
+
+            if (!nombre || !ruc) {
+                alert("Completa nombre y RUC");
+                return;
+            }
+
+            try {
+
+                const res = await fetch("https://webchavala2.onrender.com/proveedores/registro", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nombre,
+                        ruc,
+                        telefono,
+                        direccion
+                    })
+                });
+
+                const data = await res.json();
+
+                alert("Proveedor creado con éxito ✔");
+
+                console.log(data);
+
+
+                document.getElementById("provNombre").value = "";
+                document.getElementById("provRuc").value = "";
+                document.getElementById("provTel").value = "";
+                document.getElementById("provDir").value = "";
+
+            } catch (error) {
+                console.log(error);
+                alert("Error al crear proveedor");
+            }
+        }
+        async function cargarProveedores() {
+
+            const res = await fetch("https://webchavala2.onrender.com/proveedores");
+
+            const data = await res.json();
+
+            const select = document.getElementById("proveedorSelect");
+
+            data.forEach(p => {
+                const option = document.createElement("option");
+                option.value = p.nombre;
+                option.textContent = p.nombre;
+                select.appendChild(option);
+            });
+        }
+
+        cargarProveedores();
+        function buscarProveedor() {
+
+            const texto = document.getElementById("buscarProveedor").value.toLowerCase();
+
+            const select = document.getElementById("proveedorSelect");
+
+            for (let i = 0; i < select.options.length; i++) {
+
+                const nombre = select.options[i].text.toLowerCase();
+
+                if (nombre.includes(texto)) {
+
+                    select.selectedIndex = i;
+
+                    alert("Proveedor encontrado");
+
+                    return;
+                }
+            }
+
+            alert("Proveedor no encontrado");
+        }
+
+        let carrito = [];
+
+        function agregarCarrito(nombre, precio, imagen) {
+
+            carrito.push({
+                nombre,
+                precio,
+                imagen
+            });
+
+            actualizarCarrito();
+
+        }
+        function actualizarCarrito() {
+
+            const lista = document.getElementById("lista-carrito");
+
+            const contador = document.getElementById("contador-carrito");
+
+            const totalHTML = document.getElementById("total");
+
+            lista.innerHTML = "";
+
+            let total = 0;
+
+            carrito.forEach((producto, index) => {
+
+                total += producto.precio;
+
+                lista.innerHTML += `
+            <div class="item-carrito">
+
+       <img src="${producto.imagen}" class="img-carrito" onerror="this.src='../img/pastel.jpg'">
+
+        <div>
+            <p>${producto.nombre}</p>
+            <p>S/${producto.precio}</p>
+        </div>
+
+        <button onclick="eliminarProducto(${index})">
+            X
+        </button>
+
+    </div>
+        `;
+            });
+
+            contador.innerText = carrito.length;
+
+            totalHTML.innerText = `Total: S/ ${total}`;
+        }
+
+        function eliminarProducto(index) {
+
+            carrito.splice(index, 1);
+
+            actualizarCarrito();
+        }
+
+        function abrirCarrito() {
+
+            const carritoHTML = document.getElementById("carrito");
+
+            carritoHTML.classList.toggle("mostrar-carrito");
+        }
+        async function finalizarCompra() {
+
+            if (carrito.length === 0) {
+                alert("El carrito está vacío");
+                return;
+            }
+
+            const proveedor = document.getElementById("proveedorSelect").value;
+
+            if (!proveedor) {
+                alert("Selecciona un proveedor");
+                return;
+            }
+
+            const orden = {
+                proveedorNombre: proveedor,
+                productos: carrito
+            };
+
+            try {
+
+                const response = await fetch("https://webchavala2.onrender.com/ordenes/guardar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(orden)
+                });
+
+                const data = await response.json();
+
+                alert("Orden guardada con éxito");
+
+                carrito = [];
+                actualizarCarrito();
+
+            } catch (error) {
+                console.log(error);
+                alert("Error al guardar la orden");
+            }
+        }
+
+    </script>
+
+    <script>
+
+        const usuario = localStorage.getItem("usuario");
+
+        const loginBtn = document.querySelector('a[href="./register.html"]');
+        const userText = document.getElementById("userText");
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        if (usuario) {
+
+            loginBtn.style.visibility = "hidden";
+
+            userText.style.visibility = "visible";
+            logoutBtn.style.visibility = "visible";
+
+            userText.innerHTML = `
+        <i class="fa-solid fa-user"></i>
+        Hola ${usuario}
+    `;
+        }
+
+        logoutBtn.addEventListener("click", () => {
+
+            localStorage.removeItem("usuario");
+            localStorage.removeItem("email");
+
+            window.location.href = "/index.html";
+
+        });
+
+
+    </script>
+
+</body>
