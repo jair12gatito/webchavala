@@ -139,15 +139,22 @@
             const data = await response.json();
             console.log(data);
 
+// if (!loginMode) {
+//     console.log("REGISTRO OK");
+
+//     alert("Usuario registrado correctamente");
+
+//     setTimeout(() => {
+//         window.location.href = "./index.html";
+//     }, 500);
+
 if (!loginMode) {
-    console.log("REGISTRO OK");
 
     alert("Usuario registrado correctamente");
 
-    setTimeout(() => {
-        window.location.href = "./index.html";
-    }, 500);
+    console.log("REDIRIGIENDO");
 
+    window.location.href = "./index.html";
 
 } else {
 
