@@ -1,0 +1,40 @@
+<h1>Agregar Producto</h1>
+
+<input type="text" id="nombre" placeholder="Nombre">
+<input type="number" id="precio" placeholder="Precio">
+<input type="text" id="imagen" placeholder="URL Imagen">
+
+<button onclick="agregarProducto()">
+    Agregar
+</button>
+
+<script>
+const admin = localStorage.getItem("admin");
+
+if(admin !== "true"){
+    alert("Acceso denegado");
+    window.location.href = "index.html";
+}
+
+async function agregarProducto(){
+
+    const producto = {
+        nombre: document.getElementById("nombre").value,
+        precio: document.getElementById("precio").value,
+        imagen: document.getElementById("imagen").value
+    };
+
+  await fetch(
+    "https://webchavala2.onrender.com/productos",
+    {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(producto)
+    }
+);
+
+alert("Producto agregado");
+}
+</script>
