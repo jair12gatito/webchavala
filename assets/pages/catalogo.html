@@ -475,5 +475,44 @@
 
 
     </script>
+    <script>
+
+async function cargarProductos(){
+
+    const res = await fetch(
+        "https://webchavala2.onrender.com/productos"
+    );
+
+    const productos = await res.json();
+
+    const contenedor =
+        document.getElementById("productosContainer");
+
+    contenedor.innerHTML = "";
+
+    productos.forEach(producto => {
+
+        contenedor.innerHTML += `
+        
+        <div class="producto">
+
+            <img src="${producto.imagen}"
+                 alt="${producto.nombre}">
+
+            <h3>${producto.nombre}</h3>
+
+            <p class="precio">
+                S/${producto.precio}
+            </p>
+
+        </div>
+
+        `;
+    });
+}
+
+cargarProductos();
+
+</script>
 
 </body>
