@@ -6,73 +6,106 @@
     <title>Panel Admin</title>
 </head>
 
-<body>
-    <h1>Panel Administrador</h1>
-    <button onclick="location.href='./admin-productos.html'">
-        Agregar Productos
-    </button>
-    <button onclick="window.location.href='/assets/pages/admin-empleados.html'">
-        Agregar Empleados
-    </button>
+<body style="
+font-family: Arial;
+background:#f4f4f4;
+padding:20px;
+">
 
-    <button onclick="window.location.href='pedidos.html'">
-        Ver Pedidos
-    </button>
+<div style="
+max-width:900px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+">
+
+    <h1 style="text-align:center;">
+        Panel Administrador
+    </h1>
+
+    <div style="
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+    ">
+
+        <button onclick="location.href='./admin-productos.html'">
+            📦 Agregar Productos
+        </button>
+
+        <button onclick="location.href='./admin-empleados.html'">
+            👥 Agregar Empleados
+        </button>
+
+        <button onclick="location.href='/index.html'">
+            🏠 Volver al Inicio
+        </button>
+
+    </div>
 
     <hr>
 
-    <div id="contenido"></div>
-
-    <h1>Pedidos</h1>
+    <h2>📋 Pedidos</h2>
 
     <div id="listaPedidos"></div>
 
-    <script>
+</div>
 
-        const usuario = localStorage.getItem("usuario");
-        const admin = localStorage.getItem("admin");
+<script>
 
-        if (!usuario || admin !== "true") {
+const usuario = localStorage.getItem("usuario");
+const admin = localStorage.getItem("admin");
 
-            alert("Acceso denegado");
+if (!usuario || admin !== "true") {
 
-            window.location.href = "/index.html";
-        }
+    alert("Acceso denegado");
 
-        async function cargarPedidos() {
+    window.location.href = "/index.html";
+}
 
-            const res = await fetch("https://webchavala2.onrender.com/ordenes");
+async function cargarPedidos() {
 
-            const pedidos = await res.json();
+    const res = await fetch(
+        "https://webchavala2.onrender.com/ordenes"
+    );
 
-            const lista = document.getElementById("listaPedidos");
+    const pedidos = await res.json();
 
-            pedidos.forEach(pedido => {
+    const lista = document.getElementById("listaPedidos");
 
-                lista.innerHTML += `
-            <div style="
-                border:1px solid black;
-                margin:10px;
-                padding:10px;
-            ">
+    lista.innerHTML = "";
 
-                <h3>
-                    Proveedor:
-                    ${pedido.proveedorNombre}
-                </h3>
+    pedidos.forEach(pedido => {
 
-                ${pedido.productos.map(p =>
-                    `<p>${p.nombre} - S/${p.precio}</p>`
-                ).join("")}
+        lista.innerHTML += `
+        <div style="
+            border:1px solid #ddd;
+            border-radius:10px;
+            padding:15px;
+            margin-bottom:10px;
+            background:#fafafa;
+        ">
 
-            </div>
+            <h3>
+                Proveedor:
+                ${pedido.proveedorNombre}
+            </h3>
+
+            ${pedido.productos.map(p =>
+                `<p>• ${p.nombre} - S/${p.precio}</p>`
+            ).join("")}
+
+        </div>
         `;
-            });
-        }
+    });
+}
 
-        cargarPedidos();
+cargarPedidos();
 
-    </script>
+</script>
 
 </body>
 
