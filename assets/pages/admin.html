@@ -6,139 +6,85 @@
     <title>Panel Admin</title>
     <link rel="stylesheet" href="../css/style.css">
 
-<body style="
-font-family: Arial, sans-serif;
-background: var(--pastelrosado);
-padding: 20px;
-">
+<body>
 
-<div style="
-max-width: 1000px;
-margin: auto;
-background: var(--blanco);
-padding: 25px;
-border-radius: 15px;
-box-shadow: 0 0 15px rgba(185,39,112,0.2);
-">
+    <div class="admin-container">
 
-    <h1 style="
-    text-align:center;
-    color: var(--rosado);
-    margin-bottom:20px;
-    ">
-        🌸 Panel Administrador
-    </h1>
+        <h1 class="admin-title">
+            🌸 Panel Administrador
+        </h1>
 
-    <div style="
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:center;
-    margin-bottom:20px;
-    ">
+        <div class="admin-menu">
 
-        <button
-        onclick="location.href='./admin-productos.html'"
-        style="
-        background:var(--rosado);
-        color:white;
-        border:none;
-        padding:12px 20px;
-        border-radius:8px;
-        cursor:pointer;
-        ">
-            📦 Agregar Productos
-        </button>
+            <button onclick="location.href='./admin-productos.html'">
+                📦 Agregar Productos
+            </button>
 
-        <button
-        onclick="location.href='./admin-empleados.html'"
-        style="
-        background:var(--rosado);
-        color:white;
-        border:none;
-        padding:12px 20px;
-        border-radius:8px;
-        cursor:pointer;
-        ">
-            👥 Agregar Empleados
-        </button>
+            <button onclick="location.href='./admin-empleados.html'">
+                👥 Agregar Empleados
+            </button>
 
-        <button
-        onclick="location.href='/index.html'"
-        style="
-        background:var(--gris);
-        color:white;
-        border:none;
-        padding:12px 20px;
-        border-radius:8px;
-        cursor:pointer;
-        ">
-            🏠 Volver al Inicio
-        </button>
+            <button onclick="location.href='/index.html'">
+                🏠 Volver al Inicio
+            </button>
+
+        </div>
+
+        <hr>
+
+        <h2 class="pedidos-title">
+            📋 Pedidos
+        </h2>
+
+        <div id="listaPedidos"></div>
 
     </div>
 
-    <hr>
+    <script>
 
-    <h2 style="color:var(--rosado);">
-        📋 Pedidos
-    </h2>
+        const usuario = localStorage.getItem("usuario");
+        const admin = localStorage.getItem("admin");
 
-    <div id="listaPedidos"></div>
+        if (!usuario || admin !== "true") {
 
-</div>
+            alert("Acceso denegado");
+            window.location.href = "/index.html";
+        }
 
-<script>
+        async function cargarPedidos() {
 
-const usuario = localStorage.getItem("usuario");
-const admin = localStorage.getItem("admin");
+            const res = await fetch(
+                "https://webchavala2.onrender.com/ordenes"
+            );
 
-if (!usuario || admin !== "true") {
+            const pedidos = await res.json();
 
-    alert("Acceso denegado");
-    window.location.href = "/index.html";
-}
+            const lista = document.getElementById("listaPedidos");
 
-async function cargarPedidos() {
+            lista.innerHTML = "";
 
-    const res = await fetch(
-        "https://webchavala2.onrender.com/ordenes"
-    );
+            pedidos.forEach(pedido => {
 
-    const pedidos = await res.json();
+                lista.innerHTML += `
+        <div class="pedido-card">
 
-    const lista = document.getElementById("listaPedidos");
-
-    lista.innerHTML = "";
-
-    pedidos.forEach(pedido => {
-
-        lista.innerHTML += `
-        <div style="
-            border:1px solid var(--pastelrosado);
-            border-radius:10px;
-            padding:15px;
-            margin-bottom:15px;
-            background:#fff8fa;
-        ">
-
-            <h3 style="color:var(--rosado);">
-                Proveedor:
-                ${pedido.proveedorNombre}
+            <h3>
+                Proveedor: ${pedido.proveedorNombre}
             </h3>
 
             ${pedido.productos.map(p =>
-                `<p>• ${p.nombre} - S/${p.precio}</p>`
-            ).join("")}
+                    `<p>• ${p.nombre} - S/${p.precio}</p>`
+                ).join("")}
 
         </div>
         `;
-    });
-}
+            });
+        }
 
-cargarPedidos();
+        cargarPedidos();
 
-</script>
+    </script>
 
 </body>
+
 </html>
