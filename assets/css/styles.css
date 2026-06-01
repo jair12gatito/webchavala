@@ -539,3 +539,25 @@ i {
 .volver-btn{
     background:var(--gris) !important;
 }
+
+
+/* VER EMPLEADOS */
+
+.empleado-card{
+    background:#fff7fa;
+    border:1px solid var(--pastelrosado);
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:15px;
+    color:var(--negro);
+}
+
+.empleado-card h3{
+    color:var(--rosado);
+    margin-bottom:10px;
+}
+
+.empleado-card p{
+    color:var(--negro);
+    margin:5px 0;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Empleados</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-container">
+
+        <h1 class="admin-title">
+            👥 Empleados Registrados
+        </h1>
+
+        <div class="admin-menu">
+
+            <button onclick="location.href='./admin.html'">
+                ⬅ Volver al Panel
+            </button>
+
+        </div>
+
+        <div id="listaEmpleados"></div>
+
+    </div>
+
+<script>
+
+const admin = localStorage.getItem("admin");
+
+if(admin !== "true"){
+    alert("Acceso denegado");
+    window.location.href="/index.html";
+}
+
+async function cargarEmpleados(){
+
+    const res = await fetch(
+        "https://webchavala2.onrender.com/empleados"
+    );
+
+    const empleados = await res.json();
+
+    const lista = document.getElementById("listaEmpleados");
+
+    lista.innerHTML = "";
+
+    empleados.forEach(emp => {
+
+        lista.innerHTML += `
+        
+        <div class="empleado-card">
+
+            <h3>${emp.nombre}</h3>
+
+            <p><strong>Cargo:</strong> ${emp.cargo}</p>
+
+            <p><strong>Correo:</strong> ${emp.correo}</p>
+
+        </div>
+        
+        `;
+    });
+
+}
+
+cargarEmpleados();
+
+</script>
+
+</body>
+</html>
