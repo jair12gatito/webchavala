@@ -9,32 +9,31 @@
 </button>
 
 <script>
-const admin = localStorage.getItem("admin");
+    const admin = localStorage.getItem("admin");
 
-if(admin !== "true"){
-    alert("Acceso denegado");
-    window.location.href = "index.html";
-}
-
-async function agregarProducto(){
-
-    const producto = {
-        nombre: document.getElementById("nombre").value,
-        precio: document.getElementById("precio").value,
-        imagen: document.getElementById("imagen").value
-    };
-
-  await fetch(
-    "https://webchavala2.onrender.com/productos",
-    {
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body: JSON.stringify(producto)
+    if (admin !== "true") {
+        alert("Acceso denegado");
+        window.location.href = "index.html";
     }
-);
 
-alert("Producto agregado");
-}
+    async function agregarProducto() {
+
+        const producto = {
+            nombre: document.getElementById("nombre").value,
+            precio: document.getElementById("precio").value,
+            imagen: document.getElementById("imagen").value
+        };
+
+        await fetch(
+            "https://webchavala2.onrender.com/productos",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(producto)
+            }
+        );
+        alert("Estado: " + res.status);
+    }
 </script>
