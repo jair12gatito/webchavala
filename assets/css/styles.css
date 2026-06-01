@@ -489,6 +489,9 @@ i {
     border-radius:12px;
     padding:15px;
     margin-bottom:15px;
+     max-width:700px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .pedido-card *{
@@ -497,4 +500,42 @@ i {
 
 .pedido-card h3{
     color:var(--rosado) !important;
+}
+.pedido-card p{
+    margin:8px 0;
+}
+
+/* EMPLEADOS */
+
+.empleado-form{
+    max-width:500px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.empleado-form input{
+    padding:12px;
+    border:1px solid var(--pastelrosado);
+    border-radius:10px;
+    font-size:16px;
+}
+
+.empleado-form button{
+    background:var(--rosado);
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.empleado-form button:hover{
+    opacity:.9;
+}
+
+.volver-btn{
+    background:var(--gris) !important;
 }

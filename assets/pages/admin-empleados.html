@@ -1,14 +1,46 @@
-<h1>Agregar Empleado</h1>
+<!DOCTYPE html>
+<html lang="es">
 
-<input type="text" id="nombre" placeholder="Nombre">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Empleado</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
 
-<input type="text" id="cargo" placeholder="Cargo">
+<body class="admin-page">
 
-<input type="email" id="correo" placeholder="Correo">
+    <div class="admin-container">
 
-<button onclick="agregarEmpleado()">
-    Guardar Empleado
-</button>
+        <h1 class="admin-title">
+            👥 Agregar Empleado
+        </h1>
+
+        <div class="empleado-form">
+
+            <input type="text"
+                   id="nombre"
+                   placeholder="Nombre del empleado">
+
+            <input type="text"
+                   id="cargo"
+                   placeholder="Cargo">
+
+            <input type="email"
+                   id="correo"
+                   placeholder="Correo">
+
+            <button onclick="agregarEmpleado()">
+                💾 Guardar Empleado
+            </button>
+
+            <button onclick="location.href='./admin.html'"
+                    class="volver-btn">
+                ⬅ Volver al Panel
+            </button>
+
+        </div>
+
+    </div>
 
 <script>
 
@@ -19,10 +51,33 @@ if(admin !== "true"){
     window.location.href="/index.html";
 }
 
-function agregarEmpleado(){
+async function agregarEmpleado(){
 
-    alert("Botón funcionando");
+    const empleado = {
+        nombre: document.getElementById("nombre").value,
+        cargo: document.getElementById("cargo").value,
+        correo: document.getElementById("correo").value
+    };
 
+    await fetch(
+        "https://webchavala2.onrender.com/empleados",
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(empleado)
+        }
+    );
+
+    alert("Empleado agregado correctamente");
+
+    document.getElementById("nombre").value="";
+    document.getElementById("cargo").value="";
+    document.getElementById("correo").value="";
 }
 
 </script>
+
+</body>
+</html>
