@@ -1,39 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>Panel Admin</title>
+    <meta charset="UTF-8">
+    <title>Panel Admin</title>
 </head>
 
 <body>
+    <h1>Panel Administrador</h1>
 
-<h1>Pedidos</h1>
+    <button onclick="window.location.href='admin-productos.html'">
+        Agregar Productos
+    </button>
 
-<div id="listaPedidos"></div>
+    <button onclick="window.location.href='pedidos.html'">
+        Ver Pedidos
+    </button>
 
-<script>
+    <hr>
 
-const usuario = localStorage.getItem("usuario");
-const admin = localStorage.getItem("admin");
+    <div id="contenido"></div>
 
-if (!usuario || admin !== "true") {
+    <h1>Pedidos</h1>
 
-    alert("Acceso denegado");
+    <div id="listaPedidos"></div>
 
-    window.location.href = "/index.html";
-}
+    <script>
 
-async function cargarPedidos() {
+        const usuario = localStorage.getItem("usuario");
+        const admin = localStorage.getItem("admin");
 
-    const res = await fetch("https://webchavala2.onrender.com/ordenes");
+        if (!usuario || admin !== "true") {
 
-    const pedidos = await res.json();
+            alert("Acceso denegado");
 
-    const lista = document.getElementById("listaPedidos");
+            window.location.href = "/index.html";
+        }
 
-    pedidos.forEach(pedido => {
+        async function cargarPedidos() {
 
-        lista.innerHTML += `
+            const res = await fetch("https://webchavala2.onrender.com/ordenes");
+
+            const pedidos = await res.json();
+
+            const lista = document.getElementById("listaPedidos");
+
+            pedidos.forEach(pedido => {
+
+                lista.innerHTML += `
             <div style="
                 border:1px solid black;
                 margin:10px;
@@ -51,12 +65,13 @@ async function cargarPedidos() {
 
             </div>
         `;
-    });
-}
+            });
+        }
 
-cargarPedidos();
+        cargarPedidos();
 
-</script>
+    </script>
 
 </body>
+
 </html>
