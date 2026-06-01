@@ -1,0 +1,28 @@
+<h1>Agregar Empleado</h1>
+
+<input type="text" id="nombre" placeholder="Nombre">
+
+<input type="text" id="cargo" placeholder="Cargo">
+
+<input type="email" id="correo" placeholder="Correo">
+
+<button onclick="agregarEmpleado()">
+    Guardar Empleado
+</button>
+
+<script>
+
+const admin = localStorage.getItem("admin");
+
+if(admin !== "true"){
+    alert("Acceso denegado");
+    window.location.href="/index.html";
+}
+
+function agregarEmpleado(){
+
+    alert("Botón funcionando");
+
+}
+
+</script>
