@@ -1,39 +1,90 @@
-<h1>Agregar Producto</h1>
+<!DOCTYPE html>
+<html lang="es">
 
-<input type="text" id="nombre" placeholder="Nombre">
-<input type="number" id="precio" placeholder="Precio">
-<input type="text" id="imagen" placeholder="URL Imagen">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
 
-<button onclick="agregarProducto()">
-    Agregar
-</button>
+<body class="admin-page">
+
+    <div class="admin-container">
+
+        <h1 class="admin-title">
+            🎂 Agregar Producto
+        </h1>
+
+        <div class="empleado-form">
+
+            <input type="text"
+                   id="nombre"
+                   placeholder="Nombre del producto">
+
+            <input type="number"
+                   id="precio"
+                   placeholder="Precio">
+
+            <input type="text"
+                   id="imagen"
+                   placeholder="URL de la imagen">
+
+            <button onclick="agregarProducto()">
+                📦 Guardar Producto
+            </button>
+
+            <button onclick="location.href='./admin.html'"
+                    class="volver-btn">
+                ⬅ Volver al Panel
+            </button>
+
+        </div>
+
+    </div>
 
 <script>
-    const admin = localStorage.getItem("admin");
 
-    if (admin !== "true") {
-        alert("Acceso denegado");
-        window.location.href = "index.html";
+const admin = localStorage.getItem("admin");
+
+if(admin !== "true"){
+    alert("Acceso denegado");
+    window.location.href="/index.html";
+}
+
+async function agregarProducto(){
+
+    const producto = {
+        nombre: document.getElementById("nombre").value,
+        precio: document.getElementById("precio").value,
+        imagen: document.getElementById("imagen").value
+    };
+
+    const res = await fetch(
+        "https://webchavala2.onrender.com/productos",
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(producto)
+        }
+    );
+
+    if(res.ok){
+
+        alert("Producto agregado correctamente");
+
+        document.getElementById("nombre").value="";
+        document.getElementById("precio").value="";
+        document.getElementById("imagen").value="";
+
+    }else{
+
+        alert("Error al guardar");
     }
+}
 
-    async function agregarProducto() {
-
-        const producto = {
-            nombre: document.getElementById("nombre").value,
-            precio: document.getElementById("precio").value,
-            imagen: document.getElementById("imagen").value
-        };
-
-        await fetch(
-            "https://webchavala2.onrender.com/productos",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(producto)
-            }
-        );
-        alert("Estado: " + res.status);
-    }
 </script>
+
+</body>
+</html>
