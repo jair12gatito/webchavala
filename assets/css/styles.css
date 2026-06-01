@@ -436,7 +436,12 @@ i {
 }
 
 
-/* PANEL ADMIN */
+/* PAGINA ADMIN */
+
+.admin-page{
+    background: var(--pastelrosado);
+    min-height: 100vh;
+}
 
 .admin-container{
     max-width:1000px;
@@ -444,57 +449,44 @@ i {
     background:var(--blanco);
     padding:30px;
     border-radius:15px;
-    box-shadow:0 0 15px rgba(0,0,0,.1);
+    box-shadow:0 0 15px rgba(0,0,0,.15);
 }
 
 .admin-title{
     text-align:center;
     color:var(--rosado);
-    margin-bottom:25px;
 }
 
 .admin-menu{
     display:flex;
     justify-content:center;
     gap:15px;
+    margin:20px 0;
     flex-wrap:wrap;
-    margin-bottom:25px;
 }
 
 .admin-menu button{
     background:var(--rosado);
-    color:var(--blanco);
+    color:white;
     border:none;
     border-radius:10px;
     padding:12px 20px;
-    font-size:16px;
     cursor:pointer;
-    transition:.3s;
+    font-size:16px;
 }
 
 .admin-menu button:hover{
-    transform:translateY(-2px);
-    opacity:.9;
+    opacity:0.9;
 }
 
 .pedidos-title{
     color:var(--rosado);
-    margin-top:20px;
 }
 
 .pedido-card{
-    background:#fff8fa;
+    background:#fff7fa;
     border:1px solid var(--pastelrosado);
     border-radius:12px;
     padding:15px;
     margin-bottom:15px;
-}
-
-.pedido-card h3{
-    color:var(--rosado);
-    margin-bottom:10px;
-}
-
-.pedido-card p{
-    margin:5px 0;
 }
