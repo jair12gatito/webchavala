@@ -7,40 +7,72 @@
 </head>
 
 <body style="
-font-family: Arial;
-background:#f4f4f4;
-padding:20px;
+font-family: Arial, sans-serif;
+background: var(--pastelrosado);
+padding: 20px;
 ">
 
 <div style="
-max-width:900px;
-margin:auto;
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,.1);
+max-width: 1000px;
+margin: auto;
+background: var(--blanco);
+padding: 25px;
+border-radius: 15px;
+box-shadow: 0 0 15px rgba(185,39,112,0.2);
 ">
 
-    <h1 style="text-align:center;">
-        Panel Administrador
+    <h1 style="
+    text-align:center;
+    color: var(--rosado);
+    margin-bottom:20px;
+    ">
+        🌸 Panel Administrador
     </h1>
 
     <div style="
     display:flex;
     gap:10px;
     flex-wrap:wrap;
+    justify-content:center;
     margin-bottom:20px;
     ">
 
-        <button onclick="location.href='./admin-productos.html'">
+        <button
+        onclick="location.href='./admin-productos.html'"
+        style="
+        background:var(--rosado);
+        color:white;
+        border:none;
+        padding:12px 20px;
+        border-radius:8px;
+        cursor:pointer;
+        ">
             📦 Agregar Productos
         </button>
 
-        <button onclick="location.href='./admin-empleados.html'">
+        <button
+        onclick="location.href='./admin-empleados.html'"
+        style="
+        background:var(--rosado);
+        color:white;
+        border:none;
+        padding:12px 20px;
+        border-radius:8px;
+        cursor:pointer;
+        ">
             👥 Agregar Empleados
         </button>
 
-        <button onclick="location.href='/index.html'">
+        <button
+        onclick="location.href='/index.html'"
+        style="
+        background:var(--gris);
+        color:white;
+        border:none;
+        padding:12px 20px;
+        border-radius:8px;
+        cursor:pointer;
+        ">
             🏠 Volver al Inicio
         </button>
 
@@ -48,7 +80,9 @@ box-shadow:0 0 10px rgba(0,0,0,.1);
 
     <hr>
 
-    <h2>📋 Pedidos</h2>
+    <h2 style="color:var(--rosado);">
+        📋 Pedidos
+    </h2>
 
     <div id="listaPedidos"></div>
 
@@ -62,7 +96,6 @@ const admin = localStorage.getItem("admin");
 if (!usuario || admin !== "true") {
 
     alert("Acceso denegado");
-
     window.location.href = "/index.html";
 }
 
@@ -82,14 +115,14 @@ async function cargarPedidos() {
 
         lista.innerHTML += `
         <div style="
-            border:1px solid #ddd;
+            border:1px solid var(--pastelrosado);
             border-radius:10px;
             padding:15px;
-            margin-bottom:10px;
-            background:#fafafa;
+            margin-bottom:15px;
+            background:#fff8fa;
         ">
 
-            <h3>
+            <h3 style="color:var(--rosado);">
                 Proveedor:
                 ${pedido.proveedorNombre}
             </h3>
@@ -108,5 +141,4 @@ cargarPedidos();
 </script>
 
 </body>
-
 </html>
