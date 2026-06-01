@@ -57,16 +57,20 @@
             <div class="nav-menu">
                 <a class="nav-menu-link nav-menu-selected" href="./index.html"> <i class="fa-solid fa-house"></i> HOME
                 </a>
-                <a class="nav-menu-link nav-menu-noselected" href="./assets/pages/catalogo.html"> <i class="fa-solid fa-map"></i> CATALOGO
+                <a class="nav-menu-link nav-menu-noselected" href="./assets/pages/catalogo.html"> <i
+                        class="fa-solid fa-map"></i> CATALOGO
                 </a>
 
-                <a class="nav-menu-link nav-menu-noselected" href="./index.html"> <i class="fa-solid fa-paper-plane"></i>
+                <a class="nav-menu-link nav-menu-noselected" href="./index.html"> <i
+                        class="fa-solid fa-paper-plane"></i>
                     RESERVACION</a>
                 <a class="nav-menu-link nav-menu-noselected" href="./assets/pages/register.html">
                     <i class="fa-solid fa-user"></i>
                     LOGIN </a>
-                <a class="nav-menu-link nav-menu-noselected" href="./assets/pages/admin.html">
-                    ADMIN </a>    
+                <a class="nav-menu-link nav-menu-noselected" href="./assets/pages/admin.html" id="adminBtn"
+                    style="display:none;">
+                    ADMIN
+                </a>
                 <a class="nav-menu-link nav-menu-noselected" href="#" id="userText" style="visibility:hidden;">
                 </a>
 
@@ -165,7 +169,8 @@
                                 <h3>Siguenos</h3>
                                 <a class="button-redes nav-menu-link" href="https://www.facebook.com/"> Facebook</a>
                                 <a class="button-redes nav-menu-link" href="https://www.twitter.com/"> Twitter</a>
-                                <a class="button-redes nav-menu-link" href="https://www.instagram.com/chavala.pasteleria/"> Instagram</a>
+                                <a class="button-redes nav-menu-link"
+                                    href="https://www.instagram.com/chavala.pasteleria/"> Instagram</a>
                                 <a class="button-redes nav-menu-link" href="https://www.youtube.com/"> YouTube</a>
 
                             </div>
@@ -187,37 +192,43 @@
 
 
 
-<script>
+    <script>
 
-const usuario = localStorage.getItem("usuario");
+        const usuario = localStorage.getItem("usuario");
 
-const loginBtn = document.querySelector('a[href="./assets/pages/register.html"]');
-const userText = document.getElementById("userText");
-const logoutBtn = document.getElementById("logoutBtn");
+        const loginBtn = document.querySelector('a[href="./assets/pages/register.html"]');
+        const userText = document.getElementById("userText");
+        const logoutBtn = document.getElementById("logoutBtn");
+        const adminBtn = document.getElementById("adminBtn");
+        const admin = localStorage.getItem("admin");
 
-if(usuario){
+       if(usuario){
 
     loginBtn.style.visibility = "hidden";
 
     userText.style.visibility = "visible";
     logoutBtn.style.visibility = "visible";
 
+    if(admin === "true"){
+        adminBtn.style.display = "inline";
+    }
+
     userText.innerHTML = `
         <i class="fa-solid fa-user"></i>
         Hola ${usuario}
     `;
 }
+        logoutBtn.addEventListener("click", () => {
 
-logoutBtn.addEventListener("click", ()=>{
+            localStorage.removeItem("usuario");
+            localStorage.removeItem("email");
+            localStorage.removeItem("admin");
 
-    localStorage.removeItem("usuario");
-    localStorage.removeItem("email");
+            window.location.reload();
 
-    window.location.reload();
+        });
 
-});
-
-</script>
+    </script>
 
 
 
