@@ -80,8 +80,8 @@
     </h3>
 
     ${pedido.productos.map(p =>
-        `<p>• ${p.nombre} - S/${p.precio}</p>`
-    ).join("")}
+                    `<p>• ${p.nombre} - S/${p.precio}</p>`
+                ).join("")}
 
     <button onclick="eliminarPedido(${pedido.id})">
         🗑️ Eliminar Pedido
@@ -93,6 +93,39 @@
         }
 
         cargarPedidos();
+        async function eliminarPedido(id) {
+
+    if (!confirm("¿Eliminar este pedido?")) {
+        return;
+    }
+
+    try {
+
+        const res = await fetch(
+            `https://webchavala2.onrender.com/ordenes/${id}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        if (res.ok) {
+
+            alert("Pedido eliminado");
+            cargarPedidos();
+
+        } else {
+
+            alert("No se pudo eliminar");
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Error al eliminar");
+
+    }
+}
 
     </script>
 
