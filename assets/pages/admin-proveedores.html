@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Proveedores</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-container">
+
+        <h1 class="admin-title">
+            📦 Proveedores Registrados
+        </h1>
+
+        <div class="admin-menu">
+
+            <button onclick="location.href='./admin.html'">
+                ⬅ Volver al Panel
+            </button>
+
+        </div>
+
+        <div id="listaProveedores"></div>
+
+    </div>
+
+<script>
+
+const admin = localStorage.getItem("admin");
+
+if(admin !== "true"){
+    alert("Acceso denegado");
+    window.location.href="/index.html";
+}
+
+async function cargarProveedores(){
+
+    const res = await fetch(
+        "https://webchavala2.onrender.com/proveedores"
+    );
+
+    const proveedores = await res.json();
+
+    const lista = document.getElementById("listaProveedores");
+
+    lista.innerHTML = "";
+
+    proveedores.forEach(p => {
+
+        lista.innerHTML += `
+        
+        <div class="empleado-card">
+
+            <h3>${p.nombre}</h3>
+
+            <p><strong>RUC:</strong> ${p.ruc}</p>
+
+            <p><strong>Teléfono:</strong> ${p.telefono}</p>
+
+            <p><strong>Dirección:</strong> ${p.direccion}</p>
+
+        </div>
+        
+        `;
+    });
+
+}
+
+cargarProveedores();
+
+</script>
+
+</body>
+</html>
