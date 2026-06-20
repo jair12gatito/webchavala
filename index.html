@@ -278,21 +278,77 @@ function enviarPregunta(){
         </div>
     `;
 
-    let respuesta = "No entendí tu pregunta.";
+    let respuesta = "No entendí tu pregunta. Intenta preguntar sobre horarios, pedidos, tortas, precios o delivery.";
 
-    if(mensaje.toLowerCase().includes("horario")){
-        respuesta = "Atendemos de 8am a 9pm.";
+    const texto = mensaje.toLowerCase();
+
+    if(texto.includes("hola") || texto.includes("buenas")){
+        respuesta = "¡Hola! 👋 Bienvenido a Chavala. ¿En qué puedo ayudarte?";
     }
-    else if(mensaje.toLowerCase().includes("pedido")){
-        respuesta = "Puedes hacer pedidos desde nuestro catálogo.";
+
+    else if(texto.includes("horario") || texto.includes("atienden")){
+        respuesta = "Nuestro horario de atención es de 8:00 AM a 9:00 PM.";
     }
-    else if(mensaje.toLowerCase().includes("torta")){
-        respuesta = "Tenemos tortas de chocolate, temática y cheesecake.";
+
+    else if(texto.includes("pedido") || texto.includes("comprar")){
+        respuesta = "Puedes realizar tu pedido desde nuestro catálogo.";
+    }
+
+    else if(texto.includes("precio") || texto.includes("cuesta")){
+        respuesta = "Los precios aparecen debajo de cada producto en el catálogo.";
+    }
+
+    else if(texto.includes("torta")){
+        respuesta = "Tenemos torta de chocolate, torta temática, cheesecake y más.";
+    }
+
+    else if(texto.includes("cheesecake")){
+        respuesta = "Nuestro cheesecake es uno de los productos más solicitados.";
+    }
+
+    else if(texto.includes("chocolate")){
+        respuesta = "La torta de chocolate cuesta S/45.";
+    }
+
+    else if(texto.includes("delivery") || texto.includes("envio")){
+        respuesta = "Realizamos entregas según disponibilidad y coordinación previa.";
+    }
+
+    else if(texto.includes("pago") || texto.includes("yape") || texto.includes("plin")){
+        respuesta = "Aceptamos Yape, Plin y transferencias bancarias.";
+    }
+
+    else if(texto.includes("ubicacion") || texto.includes("direccion")){
+        respuesta = "Puedes contactarnos para coordinar la entrega o recojo.";
+    }
+
+    else if(texto.includes("contacto") || texto.includes("telefono")){
+        respuesta = "Puedes comunicarte con nosotros por WhatsApp.";
+    }
+
+    else if(texto.includes("catalogo")){
+        respuesta = "Puedes ver todos nuestros productos en la sección Catálogo.";
+    }
+
+    else if(texto.includes("evento") || texto.includes("cumpleaños") || texto.includes("matrimonio")){
+        respuesta = "Preparamos tortas y bocaditos para cumpleaños, matrimonios y eventos especiales.";
+    }
+
+    else if(texto.includes("personalizada")){
+        respuesta = "Sí, realizamos tortas personalizadas según el diseño que desees.";
+    }
+
+    else if(texto.includes("gracias")){
+        respuesta = "¡Gracias a ti por visitarnos! 😊";
+    }
+
+    else if(texto.includes("adios") || texto.includes("chau")){
+        respuesta = "¡Hasta luego! Esperamos tu pedido 🍰";
     }
 
     chat.innerHTML += `
         <div class="bot">
-            <b>Bot:</b> ${respuesta}
+            <b>Chavala Bot:</b> ${respuesta}
         </div>
     `;
 
