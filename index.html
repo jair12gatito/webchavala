@@ -247,7 +247,7 @@
     <input type="text" id="pregunta" placeholder="Escribe tu pregunta...">
     <button onclick="enviarPregunta()">Enviar</button>
 </div>
-    <script>
+    <!-- <script>
 
 
 const chatBtn = document.getElementById("chat-btn");
@@ -303,10 +303,24 @@ function enviarPregunta(){
 </script>
 
 
+ -->
 
 
+<script>
 
+alert("script cargado");
 
+const chatBtn = document.getElementById("chat-btn");
+const chatBox = document.getElementById("chat-box");
+
+console.log(chatBtn);
+console.log(chatBox);
+
+chatBtn.addEventListener("click", () => {
+    alert("click");
+});
+
+</script>
 
 
 
