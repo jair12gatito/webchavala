@@ -28,12 +28,10 @@
         <h2>Carrito de Compras</h2>
 
         <div id="lista-carrito"></div>
-        <select id="proveedorSelect">
-            <input type="text" id="buscarProveedor" placeholder="Buscar proveedor">
+        <input type="text" id="buscarProveedor" placeholder="Buscar proveedor">
+        <button onclick="buscarProveedor()">Buscar</button>
 
-            <button onclick="buscarProveedor()">
-                Buscar
-            </button>
+        <select id="proveedorSelect">
             <option value="">Selecciona proveedor</option>
         </select>
         <h3 id="total">Total: S/ 0</h3>
@@ -104,12 +102,14 @@
 
     </header>
     <main>
+
+
         <section class="catalogo">
 
             <h2 class="titulo-categoria">Nuestros Productos</h2>
 
             <div class="catalogo-grid" id="productosContainer">
-<!-- 
+                <!-- 
                 <div class="producto">
                     <img src="../img/tortachocolate_473x576.jpg">
                     <h3>Torta de Chocolate</h3>
@@ -234,89 +234,6 @@
 
     </main>
     <script>
-        async function crearProveedor() {
-
-            const nombre = document.getElementById("provNombre").value;
-            const ruc = document.getElementById("provRuc").value;
-            const telefono = document.getElementById("provTel").value;
-            const direccion = document.getElementById("provDir").value;
-
-            if (!nombre || !ruc) {
-                alert("Completa nombre y RUC");
-                return;
-            }
-
-            try {
-
-                const res = await fetch("https://webchavala2.onrender.com/proveedores/registro", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        nombre,
-                        ruc,
-                        telefono,
-                        direccion
-                    })
-                });
-
-                const data = await res.json();
-
-                alert("Proveedor creado con éxito ✔");
-
-                console.log(data);
-
-
-                document.getElementById("provNombre").value = "";
-                document.getElementById("provRuc").value = "";
-                document.getElementById("provTel").value = "";
-                document.getElementById("provDir").value = "";
-
-            } catch (error) {
-                console.log(error);
-                alert("Error al crear proveedor");
-            }
-        }
-        async function cargarProveedores() {
-
-            const res = await fetch("https://webchavala2.onrender.com/proveedores");
-
-            const data = await res.json();
-
-            const select = document.getElementById("proveedorSelect");
-
-            data.forEach(p => {
-                const option = document.createElement("option");
-                option.value = p.nombre;
-                option.textContent = p.nombre;
-                select.appendChild(option);
-            });
-        }
-
-        cargarProveedores();
-        function buscarProveedor() {
-
-            const texto = document.getElementById("buscarProveedor").value.toLowerCase();
-
-            const select = document.getElementById("proveedorSelect");
-
-            for (let i = 0; i < select.options.length; i++) {
-
-                const nombre = select.options[i].text.toLowerCase();
-
-                if (nombre.includes(texto)) {
-
-                    select.selectedIndex = i;
-
-                    alert("Proveedor encontrado");
-
-                    return;
-                }
-            }
-
-            alert("Proveedor no encontrado");
-        }
 
         let carrito = [];
 
@@ -461,22 +378,22 @@
     </script>
     <script>
 
-async function cargarProductos(){
+        async function cargarProductos() {
 
-    const res = await fetch(
-        "https://webchavala2.onrender.com/productos"
-    );
+            const res = await fetch(
+                "https://webchavala2.onrender.com/productos"
+            );
 
-    const productos = await res.json();
+            const productos = await res.json();
 
-    const contenedor =
-        document.getElementById("productosContainer");
+            const contenedor =
+                document.getElementById("productosContainer");
 
-    contenedor.innerHTML = "";
+            contenedor.innerHTML = "";
 
-  productos.forEach(producto => {
+            productos.forEach(producto => {
 
-    contenedor.innerHTML += `
+                contenedor.innerHTML += `
     
     <div class="producto">
 
@@ -502,11 +419,11 @@ async function cargarProductos(){
     </div>
 
     `;
-});
-}
+            });
+        }
 
-cargarProductos();
+        cargarProductos();
 
-</script>
+    </script>
 
 </body>
