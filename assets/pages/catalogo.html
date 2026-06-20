@@ -235,6 +235,46 @@
     </main>
     <script>
 
+async function cargarProveedores() {
+
+    try {
+
+        const res = await fetch(
+            "https://webchavala2.onrender.com/proveedores"
+        );
+
+        const proveedores = await res.json();
+
+        const select =
+            document.getElementById("proveedorSelect");
+
+        select.innerHTML =
+            '<option value="">Selecciona proveedor</option>';
+
+        proveedores.forEach(proveedor => {
+
+            select.innerHTML += `
+                <option value="${proveedor.nombre}">
+                    ${proveedor.nombre}
+                </option>
+            `;
+
+        });
+
+    } catch(error) {
+
+        console.error(error);
+        alert("Error al cargar proveedores");
+
+    }
+
+}
+
+cargarProveedores();
+
+</script>
+    <script>
+
         let carrito = [];
 
         function agregarCarrito(nombre, precio, imagen) {
