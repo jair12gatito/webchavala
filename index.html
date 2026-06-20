@@ -229,8 +229,80 @@
         });
 
     </script>
+    <script>
 
 
+const chatBtn = document.getElementById("chat-btn");
+const chatBox = document.getElementById("chat-box");
+
+chatBtn.addEventListener("click", () => {
+
+    if(chatBox.style.display === "block"){
+        chatBox.style.display = "none";
+    }else{
+        chatBox.style.display = "block";
+    }
+
+});
+
+function enviarPregunta(){
+
+    const input = document.getElementById("pregunta");
+    const mensaje = input.value.trim();
+
+    if(mensaje === "") return;
+
+    const chat = document.getElementById("chat-mensajes");
+
+    chat.innerHTML += `
+        <div class="user">
+            <b>Tú:</b> ${mensaje}
+        </div>
+    `;
+
+    let respuesta = "No entendí tu pregunta.";
+
+    if(mensaje.toLowerCase().includes("horario")){
+        respuesta = "Atendemos de 8am a 9pm.";
+    }
+    else if(mensaje.toLowerCase().includes("pedido")){
+        respuesta = "Puedes hacer pedidos desde nuestro catálogo.";
+    }
+    else if(mensaje.toLowerCase().includes("torta")){
+        respuesta = "Tenemos tortas de chocolate, temática y cheesecake.";
+    }
+
+    chat.innerHTML += `
+        <div class="bot">
+            <b>Bot:</b> ${respuesta}
+        </div>
+    `;
+
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+
+</script>
+
+
+<div id="chat-btn">
+    <i class="fa-brands fa-whatsapp"></i>
+</div>
+
+<div id="chat-box">
+    <div class="chat-header">
+        Chavala Bot
+    </div>
+
+    <div id="chat-mensajes">
+        <div class="bot">
+            Hola 👋 ¿En qué puedo ayudarte?
+        </div>
+    </div>
+
+    <input type="text" id="pregunta" placeholder="Escribe tu pregunta...">
+    <button onclick="enviarPregunta()">Enviar</button>
+</div>
 
 
 
