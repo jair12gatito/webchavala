@@ -17,24 +17,21 @@
 
         <div class="empleado-form">
 
-            <input type="text"
-                   id="nombre"
-                   placeholder="Nombre del empleado">
+            <input type="text" id="nombre" placeholder="Nombre del empleado">
 
-            <input type="text"
-                   id="cargo"
-                   placeholder="Cargo">
+            <input type="text" id="cargo" placeholder="Cargo">
 
-            <input type="email"
-                   id="correo"
-                   placeholder="Correo">
+            <input type="email" id="correo" placeholder="Correo">
+            <select id="rol">
+                <option value="empleado">Empleado</option>
+                <option value="admin">Administrador</option>
+            </select>
 
             <button onclick="agregarEmpleado()">
                 💾 Guardar Empleado
             </button>
 
-            <button onclick="location.href='./admin.html'"
-                    class="volver-btn">
+            <button onclick="location.href='./admin.html'" class="volver-btn">
                 ⬅ Volver al Panel
             </button>
 
@@ -42,42 +39,44 @@
 
     </div>
 
-<script>
+    <script>
 
-const admin = localStorage.getItem("admin");
+        const admin = localStorage.getItem("admin");
 
-if(admin !== "true"){
-    alert("Acceso denegado");
-    window.location.href="/index.html";
-}
-
-async function agregarEmpleado(){
-
-    const empleado = {
-        nombre: document.getElementById("nombre").value,
-        cargo: document.getElementById("cargo").value,
-        correo: document.getElementById("correo").value
-    };
-
-    await fetch(
-        "https://webchavala2.onrender.com/empleados",
-        {
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(empleado)
+        if (admin !== "true") {
+            alert("Acceso denegado");
+            window.location.href = "/index.html";
         }
-    );
 
-    alert("Empleado agregado correctamente");
+        async function agregarEmpleado() {
 
-    document.getElementById("nombre").value="";
-    document.getElementById("cargo").value="";
-    document.getElementById("correo").value="";
-}
+            const empleado = {
+                nombre: document.getElementById("nombre").value,
+                cargo: document.getElementById("cargo").value,
+                correo: document.getElementById("correo").value,
+                rol: document.getElementById("rol").value
+            };
 
-</script>
+            await fetch(
+                "https://webchavala2.onrender.com/empleados",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(empleado)
+                }
+            );
+
+            alert("Empleado agregado correctamente");
+
+            document.getElementById("nombre").value = "";
+            document.getElementById("cargo").value = "";
+            document.getElementById("correo").value = "";
+        }
+
+    </script>
 
 </body>
+
 </html>
