@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-conteiner">
+
+        <h1 class="admin-title">
+            🌸 Panel Administrador
+        </h1>
+
+        <div class="admin-menu">
+
+            <button onclick="location.href='./admin-productos.html'">
+                📦 Agregar Productos
+            </button>
+
+            <button onclick="location.href='/index.html'">
+                🏠 Volver al Inicio
+            </button>
+
+        </div>
+
+        <hr>
+
+        <h2 class="pedidos-title">
+            📋 Pedidos
+        </h2>
+
+        <div id="listaPedidos"></div>
+
+    </div>
+
+    <script>
+
+        const usuario = localStorage.getItem("usuario");
+        const admin = localStorage.getItem("admin");
+
+        if (!usuario || admin !== "true") {
+
+            alert("Acceso denegado");
+            window.location.href = "/index.html";
+        }
+
+        async function cargarPedidos() {
+
+            const res = await fetch(
+                "https://webchavala2.onrender.com/ordenes"
+            );
+
+            const pedidos = await res.json();
+
+            const lista = document.getElementById("listaPedidos");
+
+            lista.innerHTML = "";
+
+            pedidos.forEach(pedido => {
+
+                lista.innerHTML += `
+<div class="pedido-card">
+
+    <h3>
+        Proveedor: ${pedido.proveedorNombre}
+    </h3>
+
+    ${pedido.productos.map(p =>
+                    `<p>• ${p.nombre} - S/${p.precio}</p>`
+                ).join("")}
+
+    <button onclick="eliminarPedido('${pedido.id}')">
+        🗑️ Eliminar Pedido
+    </button>
+
+</div>
+`;
+            });
+        }
+
+        cargarPedidos();
+        async function eliminarPedido(id) {
+
+    if (!confirm("¿Eliminar este pedido?")) {
+        return;
+    }
+
+    try {
+
+        const res = await fetch(
+            `https://webchavala2.onrender.com/ordenes/${id}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        if (res.ok) {
+
+            alert("Pedido eliminado");
+            cargarPedidos();
+
+        } else {
+
+            alert("No se pudo eliminar");
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Error al eliminar");
+
+    }
+}
+
+    </script>
+
+</body>
+
+</html>
